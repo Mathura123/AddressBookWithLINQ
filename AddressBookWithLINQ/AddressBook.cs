@@ -7,8 +7,8 @@
 
     class AddressBook
     {
-        DataSet addressBookSet;
-        DataTable addressBookTable;
+        static DataSet addressBookSet;
+        static DataTable addressBookTable;
         /// <summary>Initializes a new instance of the <see cref="AddressBook" /> class.</summary>
         public AddressBook()
         {
@@ -117,6 +117,40 @@
             deletedRows++;
             Console.WriteLine($"{deletedRows} rows deleted");
             return addressBookTable;
+        }
+        /// <summary>Retrieves the contacts by city.</summary>
+        /// <param name="city">The city.</param>
+        public void RetrieveContactsByCity(string city)
+        {
+            var cityResults = addressBookTable.AsEnumerable().Where(x => x.Field<string>("City") == city);
+            Console.WriteLine($"Search by City {city} : ");
+            ShowTable(cityResults);
+        }
+        /// <summary>Retrieves the contacts by state.</summary>
+        /// <param name="state">The state.</param>
+        public void RetrieveContactsByState(string state)
+        {
+            var stateResults = addressBookTable.AsEnumerable().Where(x => x.Field<string>("State") == state);
+            Console.WriteLine($"Search by State {state} : ");
+            ShowTable(stateResults);
+        }
+     
+        private static void ShowTable(IEnumerable<DataRow> rows)
+        {
+            foreach (DataColumn column in addressBookTable.Columns)
+            {
+                Console.Write("{0,-20}".PadRight(8, '|').PadLeft(9, ' '), column);
+            }
+            Console.WriteLine();
+            foreach (DataRow row in rows)
+            {
+                foreach (DataColumn column in addressBookTable.Columns)
+                {
+                    Console.Write("{0,-20}".PadRight(8, '|').PadLeft(9, ' '), row[column]);
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
         }
     }
 }
