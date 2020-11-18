@@ -158,6 +158,10 @@
             Console.WriteLine($"Sorted Search by City {city} : ");
             ShowTable(cityResults);
         }
+        public void GetCountByType(string type)
+        {
+            Console.WriteLine($"Count by Type {type} : {addressBookTable.AsEnumerable().Where(x=>x.Field<string>("ContactType")==type).Count()}");
+        }
 
         private static void ShowTable(IEnumerable<DataRow> rows)
         {
