@@ -34,6 +34,8 @@
                 new DataColumn("Zip",typeof(string)),
                 new DataColumn("Email",typeof(string)),
                 new DataColumn("PhoneNo",typeof(string)),
+                new DataColumn("ContactType",typeof(string)),
+                new DataColumn("AddressBookName",typeof(string))
             };
             columns[0].AutoIncrement = true;
             columns[0].AutoIncrementSeed = 1;
@@ -47,14 +49,14 @@
         {
             foreach (DataColumn column in table.Columns)
             {
-                Console.Write("{0,-20}".PadRight(8, '|').PadLeft(9, ' '), column);
+                Console.Write("{0,-16}", column);
             }
             Console.WriteLine();
             foreach (DataRow row in table.Rows)
             {
                 foreach (DataColumn column in table.Columns)
                 {
-                    Console.Write("{0,-20}".PadRight(8, '|').PadLeft(9, ' '), row[column]);
+                    Console.Write("{0,-16}", row[column]);
                 }
                 Console.WriteLine();
             }
@@ -97,6 +99,8 @@
                     row.SetField("Zip", field[6].ToString());
                     row.SetField("Email", field[7].ToString());
                     row.SetField("PhoneNo", field[8].ToString());
+                    row.SetField("ContactType", field[9].ToString());
+                    row.SetField("AddressBookName", field[10].ToString());
                     editedRows++;
                 }
             }
@@ -159,14 +163,14 @@
         {
             foreach (DataColumn column in addressBookTable.Columns)
             {
-                Console.Write("{0,-20}".PadRight(8, '|').PadLeft(9, ' '), column);
+                Console.Write("{0,-16}", column);
             }
             Console.WriteLine();
             foreach (DataRow row in rows)
             {
                 foreach (DataColumn column in addressBookTable.Columns)
                 {
-                    Console.Write("{0,-20}".PadRight(8, '|').PadLeft(9, ' '), row[column]);
+                    Console.Write("{0,-16}", row[column]);
                 }
                 Console.WriteLine();
             }
