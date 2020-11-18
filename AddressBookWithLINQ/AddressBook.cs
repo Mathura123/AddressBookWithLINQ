@@ -134,14 +134,27 @@
             Console.WriteLine($"Search by State {state} : ");
             ShowTable(stateResults);
         }
+        /// <summary>Gets the size of contacts by city.</summary>
+        /// <param name="city">The city.</param>
         public void GetSizeByCity(string city)
         {
             Console.WriteLine($"Size by city {city} is : {addressBookTable.AsEnumerable().Where(x=>(x.Field<string>("City")==city)).Count()}");
         }
+        /// <summary>Gets the size of contacts by state.</summary>
+        /// <param name="state">The state.</param>
         public void GetSizeByState(string state)
         {
             Console.WriteLine($"Size by state {state} is : {addressBookTable.AsEnumerable().Where(x => (x.Field<string>("State") == state)).Count()}");
         }
+        /// <summary>Retrives the sorted entry for a city by name.</summary>
+        /// <param name="city">The city.</param>
+        public void RetriveSortedEntryForACity(string city)
+        {
+            var cityResults = addressBookTable.AsEnumerable().Where(x => x.Field<string>("City") == city).OrderBy(x=>(x.Field<string>("FirstName"))).ThenBy(x => (x.Field<string>("LastName")));
+            Console.WriteLine($"Sorted Search by City {city} : ");
+            ShowTable(cityResults);
+        }
+
         private static void ShowTable(IEnumerable<DataRow> rows)
         {
             foreach (DataColumn column in addressBookTable.Columns)
