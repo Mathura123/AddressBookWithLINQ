@@ -34,6 +34,8 @@
             AddressBook.ShowTable(objTable3);
             objAddressBook.RetrieveContactsByCity("California");
             objAddressBook.RetrieveContactsByState("UP");
+            objAddressBook.GetSizeByCity("Noida");
+            objAddressBook.GetSizeByState("UP");
         }
     }
 }
